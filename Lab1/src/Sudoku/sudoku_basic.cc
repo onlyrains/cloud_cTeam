@@ -38,31 +38,3 @@ bool available(int guess, int cell)
   }
   return true;
 }
-
-bool solve_sudoku_basic(int which_space)
-{
-  if (which_space >= nspaces) {
-    return true;
-  }
-
-  // find_min_arity(which_space);
-  int cell = spaces[which_space];
-
-  for (int guess = 1; guess <= NUM; ++guess) {
-    if (available(guess, cell)) {
-      // hold
-      assert(board[cell] == 0);
-      board[cell] = guess;
-
-      // try
-      if (solve_sudoku_basic(which_space+1)) {
-        return true;
-      }
-
-      // unhold
-      assert(board[cell] == guess);
-      board[cell] = 0;
-    }
-  }
-  return false;
-}
